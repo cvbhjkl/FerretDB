@@ -81,10 +81,9 @@ func prepareWhereClause(p *metadata.Placeholder, sqlFilters *types.Document) (st
 			return "", nil, lazyerrors.Error(err)
 		}
 
-		// Is the comment below correct? Does it also skip things like $or?
-		// TODO https://github.com/FerretDB/FerretDB/issues/3573
-
-		// don't pushdown $comment, it's attached to query in handlers
+		// Skip all top-level keys that start with "$" such as "$comment" or
+		// other operators. Those fields are handled by handlers and cannot be
+		// translated to SQL yet. See https://github.com/FerretDB/FerretDB/issues/3573.
 		if strings.HasPrefix(rootKey, "$") {
 			continue
 		}
