@@ -107,7 +107,7 @@ services:
       - COLLECTOR_OTLP_ENABLED=true
     ports:
       - 16686:16686 # UI on http://127.0.0.1:16686/
-      - 4318:4318 # to recieve spans from OTLP
+      - 4318:4318 # to receive spans from OTLP
 
   trivy:
     build:
